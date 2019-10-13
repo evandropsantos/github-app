@@ -1,5 +1,5 @@
-import userFixture from '../../../tests/unit/fixtures/user'
+import userFixture from '../../tests/unit/fixtures/user'
 
 export default {
-  SEARCH_USER: jest.fn().mockResolvedValue(userFixture)
+  searchUser: jest.fn().mockResolvedValue(userFixture)
 }

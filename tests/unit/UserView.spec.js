@@ -1,5 +1,3 @@
-jest.mock('@/store/actions')
-
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import UserView from '@/views/UserView'
@@ -8,6 +6,8 @@ import VUserProfile from '@/components/VUserProfile'
 import initialState from '@/store/state'
 import actions from '@/store/actions'
 import userFixture from './fixtures/user'
+
+jest.mock('@/store/actions')
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -20,7 +20,7 @@ describe('UserView', () => {
       localVue,
       store: new Vuex.Store({
         state,
-        actions,
+        actions
       })
     })
 
@@ -35,13 +35,13 @@ describe('UserView', () => {
     jest.resetAllMocks()
     state = { ...initialState }
   })
-  
+
   it('renders the component', () => {
     const { wrapper } = build()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-  
+
   it('renders main child components', () => {
     const { userSearchForm, userProfile } = build()
 
@@ -64,7 +64,7 @@ describe('UserView', () => {
   it('passes a binded user prop to user profile component', () => {
     state.user = userFixture
 
-    const  { userProfile } = build()
+    const { userProfile } = build()
 
     expect(userProfile().vm.user).toBe(state.user)
   })
